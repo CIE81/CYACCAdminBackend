@@ -1,0 +1,43 @@
+import js from '@eslint/js';
+import globals from 'globals';
+
+export default [
+  {
+    ignores: ['node_modules', 'dist']
+  },
+  js.configs.recommended,
+  {
+    files: ['**/*.mjs', '**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node
+      }
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: true
+    },
+    rules: {
+      'no-console': 'off'
+    }
+  },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.node
+      }
+    }
+  },
+  {
+    files: ['test/**/*.mjs', 'modules/**/*.test.mjs', 'modules/**/test.mjs'],
+    languageOptions: {
+      globals: {
+        ...globals.mocha
+      }
+    }
+  }
+];

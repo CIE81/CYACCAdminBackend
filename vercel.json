@@ -1,0 +1,24 @@
+{
+  "functions": {
+    "api/index.mjs": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/documentation",
+      "dest": "/api/swagger.mjs"
+    },
+    {
+      "src": "/swagger.json",
+      "dest": "/api/swagger-json.mjs"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.mjs"
+    }
+  ],
+  "env": {
+    "VERCEL": "true"
+  }
+}
