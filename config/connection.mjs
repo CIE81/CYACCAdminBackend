@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import pg from 'pg';
 import dotenv from 'dotenv';
 
 // Load environment variables (migration scripts load dotenv before importing this)
@@ -38,6 +39,7 @@ const createSequelize = () => {
   if (databaseUrl) {
     return new Sequelize(databaseUrl, {
       dialect: 'postgres',
+      dialectModule: pg,
       logging: false,
       pool: {
         max: isServerless ? 1 : 5,
@@ -71,6 +73,7 @@ const createSequelize = () => {
       host: process.env.DB_HOST || '127.0.0.1',
       port: Number(process.env.DB_PORT) || 5432,
       dialect: 'postgres',
+      dialectModule: pg,
       logging: false,
       pool: {
         max: 5,
