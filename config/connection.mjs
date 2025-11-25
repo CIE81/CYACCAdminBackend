@@ -2,25 +2,41 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
 // Load environment variables (migration scripts load dotenv before importing this)
-// Only load default .env if NODE_ENV is not production (production uses custom path)
-// This ensures migrations can load custom env files
-if (process.env.NODE_ENV !== 'production' && !process.env.DOTENV_CONFIG_PATH) {
+// Don't load .env files on Vercel (serverless) - environment variables are already available
+// Only load default .env in development
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'production' && !process.env.DOTENV_CONFIG_PATH) {
   dotenv.config();
 }
 
 const createSequelize = () => {
   const isServerless = process.env.VERCEL === 'true';
   
-  // Debug logging in production/migration scenarios
-  if (process.env.NODE_ENV === 'production') {
-    console.log(`[connection] DATABASE_URL exists: ${!!process.env.DATABASE_URL}`);
-    if (process.env.DATABASE_URL) {
-      console.log(`[connection] DATABASE_URL starts with: ${process.env.DATABASE_URL.substring(0, 30)}...`);
+  // Fix DATABASE_URL if it has duplicate prefix (common issue with .env files)
+  let databaseUrl = process.env.DATABASE_URL;
+  if (databaseUrl) {
+    // Check for duplicate prefix and fix it
+    if (databaseUrl.startsWith('DATABASE_URL=')) {
+      databaseUrl = databaseUrl.replace(/^DATABASE_URL=/, '').trim();
+      process.env.DATABASE_URL = databaseUrl;
+    }
+    
+    // Validate it's a proper connection string
+    if (!databaseUrl || (!databaseUrl.startsWith('postgresql://') && !databaseUrl.startsWith('postgres://'))) {
+      console.error('[connection] ERROR: DATABASE_URL is not a valid PostgreSQL connection string');
+      throw new Error('Invalid DATABASE_URL format. Must start with postgresql:// or postgres://');
     }
   }
   
-  if (process.env.DATABASE_URL) {
-    return new Sequelize(process.env.DATABASE_URL, {
+  // Debug logging in production/migration scenarios
+  if (process.env.NODE_ENV === 'production' || isServerless) {
+    console.log(`[connection] DATABASE_URL exists: ${!!databaseUrl}`);
+    if (databaseUrl) {
+      console.log(`[connection] DATABASE_URL starts with: ${databaseUrl.substring(0, 30)}...`);
+    }
+  }
+  
+  if (databaseUrl) {
+    return new Sequelize(databaseUrl, {
       dialect: 'postgres',
       logging: false,
       pool: {
