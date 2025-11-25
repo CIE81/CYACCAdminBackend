@@ -46,6 +46,16 @@ const User = sequelize.define(
       allowNull: false,
       defaultValue: false,
       field: 'super_admin'
+    },
+    resetToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      field: 'reset_token'
+    },
+    resetTokenExpires: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: 'reset_token_expires'
     }
   },
   {

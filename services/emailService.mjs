@@ -2,18 +2,35 @@ import nodemailer from 'nodemailer';
 
 let transporter;
 
+const resolveFromAddress = () => {
+  const fromName = process.env.EMAIL_FROM_NAME || 'CYACC Admin';
+  const fromEmail = process.env.EMAIL_USER;
+  if (!fromEmail) {
+    throw new Error('EMAIL_USER environment variable is required for sending emails.');
+  }
+  return `"${fromName}" <${fromEmail}>`;
+};
+
 export const getTransporter = async () => {
   if (transporter) {
     return transporter;
   }
 
+  const user = process.env.EMAIL_USER;
+  const pass = process.env.EMAIL_PASSWORD;
+
+  if (!user || !pass) {
+    throw new Error('EMAIL_USER and EMAIL_PASSWORD environment variables are required for the email service.');
+  }
+
   transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT) || 587,
-    secure: false,
+    service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user,
+      pass
+    },
+    tls: {
+      rejectUnauthorized: false
     }
   });
 
@@ -27,7 +44,7 @@ export const getTransporter = async () => {
 export const sendEmail = async ({ to, subject, text, html }) => {
   const tx = await getTransporter();
   return tx.sendMail({
-    from: process.env.EMAIL_USER,
+    from: resolveFromAddress(),
     to,
     subject,
     text,

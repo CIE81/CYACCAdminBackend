@@ -5,13 +5,23 @@ import {
   getUserHandler,
   listUsersHandler,
   loginHandler,
-  updateUserHandler
+  updateUserHandler,
+  forgotPasswordHandler,
+  validateResetTokenHandler,
+  resetPasswordHandler,
+  updateProfileHandler,
+  changePasswordHandler
 } from './handlers.mjs';
 import {
   createUserSchema,
   updateUserSchema,
   userIdParamSchema,
-  loginSchema
+  loginSchema,
+  forgotPasswordSchema,
+  resetTokenQuerySchema,
+  resetPasswordSchema,
+  updateProfileSchema,
+  changePasswordSchema
 } from './validation.mjs';
 
 const basePath = '/api/users';
@@ -41,6 +51,88 @@ export default () => [
       }
     },
     handler: loginHandler
+  },
+  {
+    method: 'POST',
+    path: '/api/auth/forgot-password',
+    options: {
+      auth: false,
+      tags: ['api', 'auth'],
+      description: 'Request password reset email',
+      plugins: {
+        'hapi-swagger': {
+          security: []
+        }
+      },
+      validate: {
+        payload: forgotPasswordSchema
+      }
+    },
+    handler: forgotPasswordHandler
+  },
+  {
+    method: 'GET',
+    path: '/api/auth/reset-password/validate',
+    options: {
+      auth: false,
+      tags: ['api', 'auth'],
+      description: 'Validate password reset token',
+      plugins: {
+        'hapi-swagger': {
+          security: []
+        }
+      },
+      validate: {
+        query: resetTokenQuerySchema
+      }
+    },
+    handler: validateResetTokenHandler
+  },
+  {
+    method: 'POST',
+    path: '/api/auth/reset-password',
+    options: {
+      auth: false,
+      tags: ['api', 'auth'],
+      description: 'Reset password using token',
+      plugins: {
+        'hapi-swagger': {
+          security: []
+        }
+      },
+      validate: {
+        payload: resetPasswordSchema
+      }
+    },
+    handler: resetPasswordHandler
+  },
+  {
+    method: 'PUT',
+    path: '/api/users/me',
+    options: {
+      auth: 'jwt',
+      tags: ['api', 'users'],
+      description: 'Update current user profile',
+      plugins: securedSwagger,
+      validate: {
+        payload: updateProfileSchema
+      }
+    },
+    handler: updateProfileHandler
+  },
+  {
+    method: 'POST',
+    path: '/api/users/me/change-password',
+    options: {
+      auth: 'jwt',
+      tags: ['api', 'users'],
+      description: 'Change current user password',
+      plugins: securedSwagger,
+      validate: {
+        payload: changePasswordSchema
+      }
+    },
+    handler: changePasswordHandler
   },
   {
     method: 'GET',

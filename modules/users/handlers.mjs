@@ -4,7 +4,12 @@ import {
   createUser,
   updateUser,
   deleteUser,
-  authenticateUser
+  authenticateUser,
+  requestPasswordReset,
+  validatePasswordResetToken,
+  resetPasswordWithToken,
+  updateCurrentUser,
+  changePassword
 } from './services.mjs';
 import { generateToken } from '../../middleware/auth.mjs';
 
@@ -52,6 +57,19 @@ export const updateUserHandler = async request => {
   };
 };
 
+export const updateProfileHandler = async request => {
+  const userId = request.auth?.credentials?.id;
+  const user = await updateCurrentUser(userId, request.payload);
+  return {
+    respCode: 200,
+    message: 'Profile updated successfully.',
+    data: {
+      id: user.id,
+      ...sanitize(user)
+    }
+  };
+};
+
 export const deleteUserHandler = async (request, h) => {
   await deleteUser(request.params.id);
   return h
@@ -75,5 +93,55 @@ export const loginHandler = async request => {
       token,
       user: sanitize(user)
     }
+  };
+};
+
+export const forgotPasswordHandler = async request => {
+  const { email } = request.payload;
+  await requestPasswordReset(email);
+
+  return {
+    respCode: 200,
+    message: 'If an account exists for the provided email, a reset link has been sent.',
+    data: null
+  };
+};
+
+export const validateResetTokenHandler = async request => {
+  const { token, email } = request.query;
+  await validatePasswordResetToken(token, email);
+
+  return {
+    respCode: 200,
+    message: 'Reset token is valid.',
+    data: null
+  };
+};
+
+export const resetPasswordHandler = async request => {
+  const { token, email, password } = request.payload;
+  const user = await resetPasswordWithToken({ token, email, newPassword: password });
+  const authToken = generateToken(user);
+
+  return {
+    respCode: 200,
+    message: 'Password reset successfully.',
+    data: {
+      token: authToken,
+      user: sanitize(user)
+    }
+  };
+};
+
+export const changePasswordHandler = async request => {
+  const userId = request.auth?.credentials?.id;
+  const { currentPassword, newPassword } = request.payload;
+
+  await changePassword(userId, { currentPassword, newPassword });
+
+  return {
+    respCode: 200,
+    message: 'Password changed successfully.',
+    data: null
   };
 };

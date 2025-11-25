@@ -3,12 +3,16 @@ import User from './user.mjs';
 import PrayersRequest from './prayersRequest.mjs';
 import Member from './member.mjs';
 import Event from './event.mjs';
+import Parish from './parish.mjs';
+import Resource from './resource.mjs';
 
-export { sequelize, User, PrayersRequest, Member, Event };
+export { sequelize, User, PrayersRequest, Member, Event, Parish, Resource };
 
 export const initModels = () => ({
   User,
   PrayersRequest,
   Member,
-  Event
+  Event,
+  Parish,
+  Resource
 });

@@ -28,3 +28,31 @@ export const loginSchema = Joi.object({
   userName: Joi.string().required(),
   password: Joi.string().required()
 });
+
+export const forgotPasswordSchema = Joi.object({
+  email: Joi.string().email().required()
+});
+
+export const resetTokenQuerySchema = Joi.object({
+  token: Joi.string().required(),
+  email: Joi.string().email().required()
+});
+
+export const resetPasswordSchema = Joi.object({
+  token: Joi.string().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).max(255).required()
+});
+
+export const updateProfileSchema = Joi.object({
+  firstName: Joi.string().min(2).max(120).required(),
+  lastName: Joi.string().min(2).max(120).required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().allow('', null),
+  currentPassword: Joi.string().required()
+});
+
+export const changePasswordSchema = Joi.object({
+  currentPassword: Joi.string().required(),
+  newPassword: Joi.string().min(8).max(255).required()
+});
