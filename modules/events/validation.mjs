@@ -28,3 +28,12 @@ export const updateEventSchema = Joi.object({
     }
     return value;
   }, 'Date validation');
+
+export const addMemberToEventSchema = Joi.object({
+  memberId: Joi.number().integer().positive().required()
+});
+
+export const eventMemberIdSchema = Joi.object({
+  id: Joi.number().integer().positive().required(),
+  memberId: Joi.number().integer().positive().required()
+});

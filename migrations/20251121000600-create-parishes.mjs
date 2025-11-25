@@ -1,8 +1,7 @@
-'use strict';
-
-module.exports = {
+/** @type {import('sequelize-cli').Migration} */
+export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('events', {
+    await queryInterface.createTable('parishes', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -13,24 +12,28 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      start_date_time: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      end_date_time: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      picture_link: {
+      address: {
         type: Sequelize.STRING,
         allowNull: true
       },
-      description: {
-        type: Sequelize.TEXT,
+      phone: {
+        type: Sequelize.STRING,
         allowNull: true
       },
-      location: {
+      email: {
         type: Sequelize.STRING,
+        allowNull: true
+      },
+      website: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      mass_schedule: {
+        type: Sequelize.JSONB,
+        allowNull: true
+      },
+      confession_schedule: {
+        type: Sequelize.JSONB,
         allowNull: true
       },
       created_at: {
@@ -47,6 +50,7 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('events');
+    await queryInterface.dropTable('parishes');
   }
 };
+

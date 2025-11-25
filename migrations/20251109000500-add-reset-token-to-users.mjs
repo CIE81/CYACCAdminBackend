@@ -1,6 +1,5 @@
-'use strict';
-
-module.exports = {
+/** @type {import('sequelize-cli').Migration} */
+export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn('users', 'reset_token', {
       type: Sequelize.STRING,

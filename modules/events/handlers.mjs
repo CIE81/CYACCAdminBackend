@@ -3,7 +3,9 @@ import {
   getEventById,
   createEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  addMemberToEvent,
+  removeMemberFromEvent
 } from './services.mjs';
 
 export const listEventsHandler = async () => {
@@ -53,4 +55,22 @@ export const deleteEventHandler = async (request, h) => {
       data: null
     })
     .code(204);
+};
+
+export const addMemberToEventHandler = async request => {
+  const updated = await addMemberToEvent(request.params.id, request.payload.memberId);
+  return {
+    respCode: 200,
+    message: 'Member added to event successfully',
+    data: updated
+  };
+};
+
+export const removeMemberFromEventHandler = async request => {
+  const updated = await removeMemberFromEvent(request.params.id, request.params.memberId);
+  return {
+    respCode: 200,
+    message: 'Member removed from event successfully',
+    data: updated
+  };
 };

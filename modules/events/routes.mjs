@@ -3,9 +3,17 @@ import {
   deleteEventHandler,
   getEventHandler,
   listEventsHandler,
-  updateEventHandler
+  updateEventHandler,
+  addMemberToEventHandler,
+  removeMemberFromEventHandler
 } from './handlers.mjs';
-import { createEventSchema, updateEventSchema, eventIdSchema } from './validation.mjs';
+import {
+  createEventSchema,
+  updateEventSchema,
+  eventIdSchema,
+  addMemberToEventSchema,
+  eventMemberIdSchema
+} from './validation.mjs';
 
 const basePath = '/api/events';
 
@@ -83,5 +91,34 @@ export default () => [
       }
     },
     handler: deleteEventHandler
+  },
+  {
+    method: 'POST',
+    path: `${basePath}/{id}/members`,
+    options: {
+      auth: 'jwt',
+      tags: ['api', 'events'],
+      description: 'Add a member to an event',
+      plugins: securedSwagger,
+      validate: {
+        params: eventIdSchema,
+        payload: addMemberToEventSchema
+      }
+    },
+    handler: addMemberToEventHandler
+  },
+  {
+    method: 'DELETE',
+    path: `${basePath}/{id}/members/{memberId}`,
+    options: {
+      auth: 'jwt',
+      tags: ['api', 'events'],
+      description: 'Remove a member from an event',
+      plugins: securedSwagger,
+      validate: {
+        params: eventMemberIdSchema
+      }
+    },
+    handler: removeMemberFromEventHandler
   }
 ];

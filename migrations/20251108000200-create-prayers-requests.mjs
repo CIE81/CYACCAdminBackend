@@ -1,28 +1,19 @@
-'use strict';
-
-module.exports = {
+/** @type {import('sequelize-cli').Migration} */
+export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('resources', {
+    await queryInterface.createTable('prayers_requests', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
-      name: {
-        type: Sequelize.STRING,
+      content: {
+        type: Sequelize.TEXT,
         allowNull: false
       },
-      picture: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      link: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      type: {
-        type: Sequelize.ENUM('movie', 'book', 'podcast', 'website'),
+      date: {
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
       created_at: {
@@ -39,8 +30,7 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('resources');
+    await queryInterface.dropTable('prayers_requests');
   }
 };
-
 
