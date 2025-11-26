@@ -147,6 +147,8 @@ export const stop = async () => {
   }
 };
 
+export { server };
+
 if (process.env.VERCEL !== 'true' && process.env.NODE_ENV !== 'test') {
   start().catch(err => {
     console.error(err);
