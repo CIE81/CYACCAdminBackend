@@ -18,15 +18,11 @@
     },
     "security": [
       {
-        "jwt": [
-          
-        ]
+        "jwt": []
       }
     ],
     "swagger": "2.0",
-    "tags": [
-      
-    ],
+    "tags": [],
     "paths": {
       "/api/events": {
         "get": {
@@ -37,9 +33,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -68,9 +62,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -109,9 +101,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -140,9 +130,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -164,9 +152,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -195,9 +181,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -219,9 +203,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -250,9 +232,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -274,9 +254,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -305,9 +283,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -330,9 +306,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -361,9 +335,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -400,9 +372,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -435,9 +405,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -475,9 +443,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -508,9 +474,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -543,9 +507,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -583,9 +545,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -616,9 +576,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -651,9 +609,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -691,9 +647,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -724,9 +678,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -759,9 +711,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -799,9 +749,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -832,9 +780,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -867,9 +813,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -907,9 +851,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -940,9 +882,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -975,9 +915,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1015,9 +953,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1048,9 +984,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1087,9 +1021,7 @@
           "tags": [
             "auth"
           ],
-          "security": [
-            
-          ],
+          "security": [],
           "responses": {
             "default": {
               "schema": {
@@ -1116,9 +1048,7 @@
           "tags": [
             "auth"
           ],
-          "security": [
-            
-          ],
+          "security": [],
           "responses": {
             "default": {
               "schema": {
@@ -1146,9 +1076,7 @@
           "tags": [
             "auth"
           ],
-          "security": [
-            
-          ],
+          "security": [],
           "responses": {
             "default": {
               "schema": {
@@ -1175,9 +1103,7 @@
           "tags": [
             "auth"
           ],
-          "security": [
-            
-          ],
+          "security": [],
           "responses": {
             "default": {
               "schema": {
@@ -1215,9 +1141,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1248,9 +1172,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1281,9 +1203,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {
@@ -1325,9 +1245,7 @@
           ],
           "security": [
             {
-              "jwt": [
-                
-              ]
+              "jwt": []
             }
           ],
           "responses": {

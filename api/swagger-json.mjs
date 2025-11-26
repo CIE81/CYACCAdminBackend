@@ -28,6 +28,9 @@ export default async (req, res) => {
     const baseUrl = `${protocol}://${host}`;
     
     const spec = { ...swaggerSpec };
+    delete spec.host;
+    delete spec.basePath;
+    delete spec.schemes;
     spec.servers = [
       {
         url: baseUrl,

@@ -14,6 +14,7 @@
     "test:watch": "npm run test -- --watch",
     "test:coverage": "nyc npm run test",
     "db:migrate": "node scripts/migrate.mjs up",
+    "docs:swagger": "node scripts/generate-swagger.mjs",
     "db:migrate:production": "cross-env NODE_ENV=production DOTENV_CONFIG_PATH=./.env.production node scripts/migrate.mjs up",
     "db:migrate:status": "node scripts/migrate.mjs status",
     "db:migrate:down": "node scripts/migrate.mjs down",
