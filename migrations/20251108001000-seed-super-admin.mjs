@@ -1,8 +1,6 @@
-'use strict';
+import bcrypt from 'bcryptjs';
 
-const bcrypt = require('bcryptjs');
-
-module.exports = {
+export default {
   async up(queryInterface) {
     const password = 'ASDFgka%#%7sdgS#@54_2134sf';
     const hashed = await bcrypt.hash(password, 10);
@@ -26,3 +24,4 @@ module.exports = {
     await queryInterface.bulkDelete('users', { user_name: 'ioan.cucerzan' });
   }
 };
+
