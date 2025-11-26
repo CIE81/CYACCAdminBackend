@@ -1,18 +1,46 @@
 import Boom from '@hapi/boom';
 import HapiRateLimit from 'hapi-rate-limit';
 
-export const registerRateLimiting = async server => {
-  if (process.env.VERCEL === 'true') {
-    return;
-  }
+export const corsConfig = {
+  origin: (() => {
+    const allowedOrigins = [];
 
+    allowedOrigins.push('http://localhost:3000');
+    allowedOrigins.push('http://localhost:5000');
+
+    allowedOrigins.push('https://cyacc-admin-web.vercel.app');
+
+    if (process.env.VERCEL_URL) {
+      allowedOrigins.push(`https://${process.env.VERCEL_URL}`);
+    }
+
+    if (process.env.ALLOWED_ORIGINS) {
+      const envOrigins = process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
+      allowedOrigins.push(...envOrigins);
+    }
+
+    if (process.env.NODE_ENV === 'development' || process.env.VERCEL) {
+      return ['*'];
+    }
+
+    return allowedOrigins;
+  })(),
+  credentials: true,
+  additionalHeaders: ['x-api-key']
+};
+
+export const registerRateLimiting = async server => {
   await server.register({
     plugin: HapiRateLimit,
     options: {
-      enabled: true,
-      userLimit: 1000,
+      enabled: process.env.RATE_LIMIT_ENABLED !== 'false',
+      userLimit: parseInt(process.env.RATE_LIMIT_MAX, 10) || 500,
       pathLimit: false,
-      trustProxy: true
+      authLimit: 5,
+      trustProxy: true,
+      userCache: {
+        expiresIn: parseInt(process.env.RATE_LIMIT_WINDOW, 10) || 900000
+      }
     }
   });
 };
